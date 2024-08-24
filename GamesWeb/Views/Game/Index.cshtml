@@ -1,0 +1,179 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var user = (UserModel)ViewData["user"];
+    var game = (GameModel)ViewData["game"];
+    var memberships = (MembershipModel[])ViewData["memberships"];
+}
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="main-nav">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white" href="#">Goodie Games</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#features">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#pricing">Pricing</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Games
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="FarmSim.html">Farm Sim</a></li>
+                        <li><a class="dropdown-item" href="#">Retail Sim</a></li>
+                        <li><a class="dropdown-item" href="#">Ruin Looter</a></li>
+                    </ul>
+                    @if (user == null)
+                    {
+                        <li class="nav-item">
+                            <a class="mx-2 nav-link active bg-success rounded" asp-controller="home" asp-action="login">Log In</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="mx-2 nav-link active bg-gradient rounded" asp-controller="home" asp-action="signup">Sign Up</a>
+                        </li>
+                    }
+                    else
+                    {
+                        @if (user.Name == "Goodie")
+                        {
+                            <li class="nav-item">
+                                <a class="mx-2 nav-link active bg-warning rounded" asp-controller="home" asp-action="adminpanel">Admin Panel</a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="mx-2 nav-link active bg-danger rounded" asp-controller="home" asp-action="index">Log Out</a>
+                        </li>
+                        <li class="nav-item">
+                        <img src="img/@user.PfpName" class="mx-2 profile-pic rounded-circle" alt="Noone" height="40px" />
+                        </li>
+                    }
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="section" id="home">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center mt-5">@game.Name</h1>
+        </div>
+        <div class="col-4 text-center">
+            <button class="btn sub-h-btn text-center" type="button" data-bs-toggle="collapse" data-bs-target="#about-collapse" aria-expanded="false" aria-controls="about-collapse">
+                About
+            </button>
+        </div>
+        <div class="col-4 text-center">
+            <button class="btn sub-h-btn text-center" type="button" data-bs-toggle="collapse" data-bs-target="#contributors-collapse" aria-expanded="false" aria-controls="contributors-collapse">
+                Contributors
+            </button>
+        </div>
+        <div class="col-4 text-center">
+            <button class="btn sub-h-btn text-center" type="button" data-bs-toggle="collapse" data-bs-target="#sponsorship-collapse" aria-expanded="false" aria-controls="sponsorship-collapse">
+                Sponsorships
+            </button>
+        </div>
+        <div class="col-12">
+            <div class="collapse" id="about-collapse">
+                <div class="card card-body bg-dark">
+                    @Model.Item1.Description
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="collapse" id="contributors-collapse">
+                <div class="card">
+                    <div class="card-body bg-dark text-center">
+                        <pre>
+                  Barış Yazıcı (The best tactic/design giver)
+                  Deniz Hatipoğlu (The best man in the universe)
+                  Kübranur (The best blender user)
+                </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="collapse" id="sponsorship-collapse">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section" id="features">
+</div>
+
+<div class="section" id="pricing">
+    <h1 class="text-center">Memberships</h1>
+    <div class="row justify-content-center">
+        @for (int i = 0; i < memberships.Length; i++)
+        {
+            @if (i % 3 == 2)
+            {
+                <div class="col-md-4">
+                    <div class="card membership membership-center" id="@(memberships[i].Name)-membership">
+                        <img class="card-img-top" src="img/@(memberships[i].Name)-cropped.png">
+                        <div class="card-body text-center">
+                            <h1 class="row text-center">@memberships[i].Name</h1>
+                            <div class="row text-center">
+                                <div class="col-6">
+                                    <span class="price-tag">@(memberships[i].Monthly)$</span>/Month
+                                </div>
+                                <div class="col-6">
+                                    <span class="price-tag">@(memberships[i].Monthly * 10)$</span>/Year
+                                </div>
+                            </div>
+                            <hr>
+                            <ul style="list-style: none;">
+                                <li>@memberships[i].Description</li>
+                            </ul>
+                            <hr>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#purchase-modal" onclick="purchaseModalOpening('@(memberships[i].Name)')">
+                                Subscribe
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+            
+            else
+            {
+                <div class="col-md-4">
+                        <div class="card membership" id="@(memberships[i].Name)-membership">
+                        <img class="card-img-top" src="img/@(memberships[i].Name)-cropped.png">
+                        <div class="card-body text-center">
+                            <h1 class="row text-center">@memberships[i].Name</h1>
+                            <div class="row text-center">
+                                <div class="col-6">
+                                    <span class="price-tag">@(memberships[i].Monthly)$</span>/Month
+                                </div>
+                                <div class="col-6">
+                                    <span class="price-tag">@(memberships[i].Monthly * 10)$</span>/Year
+                                </div>
+                            </div>
+                            <hr>
+                            <ul style="list-style: none;">
+                                <li>@memberships[i].Description</li>
+                            </ul>
+                            <hr>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#purchase-modal" onclick="purchaseModalOpening('@(memberships[i].Name)')">
+                                Subscribe
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

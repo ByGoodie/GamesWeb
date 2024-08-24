@@ -1,0 +1,225 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model UserModel
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="main-nav">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white" href="#">Goodie Games</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#home">Home</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#features">Features</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#pricing">Pricing</a>
+            </li>
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Games
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="FarmSim.html">Farm Sim</a></li>
+                <li><a class="dropdown-item" href="#">Retail Sim</a></li>
+                <li><a class="dropdown-item" href="#">Ruin Looter</a></li>
+            </ul>
+            @if (Model == null)
+            {
+                <li class="nav-item">
+                    <a class="mx-2 nav-link active bg-success rounded" asp-controller="home" asp-action="login">Log In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="mx-2 nav-link active bg-gradient rounded" asp-controller="home" asp-action="signup">Sign Up</a>
+                </li>
+            }
+            else {
+                @if (Model.Name == "Goodie") {
+                    <li class="nav-item">
+                        <a class="mx-2 nav-link active bg-warning rounded" asp-controller="home" asp-action="AdminPanel">Admin Panel</a>
+                    </li>
+                }
+                <li class="nav-item">
+                    <a class="mx-2 nav-link active bg-danger rounded" asp-controller="home" asp-action="logout">Log Out</a>
+                </li>
+                <li class="nav-item">
+                    <img src="img/@Model.PfpName" class="mx-2 profile-pic rounded-circle" alt="Noone" height="40px"/>
+                </li>
+            }
+           
+        </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="section" id="home">
+    <div class="row">
+    <div class="col-md-4 col-sm-6">
+        <div class="card m-4" style="margin: auto; text-align: center;">
+        <img src="img/pepsi.jpg" class="card-img-top">
+        <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text">A power upping drink while u playin games.</p>
+            <a href="https://www.pepsi.com.tr/" class="btn btn-danger" target="_blank">Buy it!</a>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+<div class="section" id="features">
+    <div class="row">
+    <div class="col-6">
+        <div id="features-carousel" class="carousel slide">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#features-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#features-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#features-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#features-carousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+            <img src="img/VIP.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>VIP Membership<span class="badge bg-danger">NEW</span></h5>
+                <p>This membership gives control over lots of loyal farmer in FarmSim.</p>
+            </div>
+            </div>
+            <div class="carousel-item">
+            <img src="img/pepsi.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>PepsiMan Skin<span class="badge bg-danger">NEW</span></h5>
+                <p>This power ups you infinitely in games.</p>
+            </div>
+            </div>
+            <div class="carousel-item">
+            <img src="img/apotemi.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Apotemi Membeship<span class="badge bg-danger">NEW</span></h5>
+                <p>This makes ur character's iq the max level of universe. (as rick sanches)</p>
+            </div>
+            </div>
+            <div class="carousel-item">
+            <img src="img/ghost.webp" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Ghost Skin<span class="badge bg-danger">NEW</span></h5>
+                <p>Max level of silency and exploit of guns in RuinLooter.</p>
+            </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#features-carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#features-carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+        </div>
+    </div>
+    </div>
+</div>
+
+<div class="section" id="pricing">
+    <div class="row">
+    <div class="col-12"> 
+        <div class="h1 text-center mt-5">
+        MemberShips
+        </div>
+    </div>
+    <div class="col-6">
+        <table class="table text-center table-dark">
+        <thead>
+            <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>VIP</td>
+            <td>10$</td>
+            <td><a href="MemberShips.html" class="btn btn-success">investigate</a></td>
+            </tr>
+            <tr>
+            <td>Apotemi</td>
+            <td>4$</td>
+            <td><a href="MemberShips.html" class="btn btn-success">investigate</a></td>
+            </tr>
+        </tbody>
+        </table>  
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-12"> 
+        <div class="h1 text-center mt-3">
+        Games
+        </div>
+    </div>
+    <div class="col-6">
+        <table class="table text-center table-dark">
+        <thead>
+            <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>FarmSim</td>
+            <td>2$</td>
+            <td><a href="FarmSim.html" class="btn btn-success">investigate</a></td>
+            </tr>
+            <tr>
+            <td>Ruin Looter</td>
+            <td>2$</th>
+            <td><a href="#" class="btn btn-success">investigate</a></td>
+            </tr>
+            <tr>
+            <td>Retail Sim</td>
+            <td>2$</th>
+            <td><a href="#" class="btn btn-success">investigate</a></td>
+            </tr>
+        </tbody>
+        </table>  
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-12"> 
+        <div class="h1 text-center mt-3">
+        Skins
+        </div>
+    </div>
+    <div class="col-6">
+        <table class="table text-center table-dark">
+        <thead>
+            <tr>
+            <th scope="col">Name</td>
+            <th scope="col">Price</td>
+            <th scope="col"></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>PepsiMan</td>
+            <td>10$</td>
+            <td><a href="#" class="btn btn-success">investigate</a></td>
+            </tr>
+            <tr>
+            <td>Ghost</td>
+            <td>2$</td>
+            <td><a href="#" class="btn btn-success">investigate</a></td>
+            </tr>
+        </tbody>
+        </table>  
+    </div>
+    </div>
+</div>

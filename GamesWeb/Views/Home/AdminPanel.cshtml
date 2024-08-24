@@ -1,0 +1,126 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var users = (UserModel[])ViewData["users"];
+    var memberships = (MembershipModel[])ViewData["memberships"];
+    var games = (GameModel[])ViewData["games"];
+}
+
+@model UserModel
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="main-nav">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white" href="#">Goodie Games</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#features">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#pricing">Pricing</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Games
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="FarmSim.html">Farm Sim</a></li>
+                        <li><a class="dropdown-item" href="#">Retail Sim</a></li>
+                        <li><a class="dropdown-item" href="#">Ruin Looter</a></li>
+                    </ul>
+                    @if (Model == null)
+                    {
+                    <li class="nav-item">
+                        <a class="mx-2 nav-link active bg-success rounded" asp-controller="home" asp-action="login">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="mx-2 nav-link active bg-gradient rounded" asp-controller="home" asp-action="signup">Sign Up</a>
+                    </li>
+                    }
+                    else
+                    {
+                        @if (Model.Name == "Goodie")
+                        {
+                        <li class="nav-item">
+                            <a class="mx-2 nav-link active bg-warning rounded" asp-controller="home" asp-action="adminpanel">Admin Panel</a>
+                        </li>
+                        }
+                    <li class="nav-item">
+                        <a class="mx-2 nav-link active bg-danger rounded" asp-controller="home" asp-action="logout">Log Out</a>
+                    </li>
+                    <li class="nav-item">
+                        <img src="img/@Model.PfpName" class="mx-2 profile-pic rounded-circle" alt="Noone" height="40px" />
+                    </li>
+                    }
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="section" id="users">
+    <h1 class="text-center">Users</h1>
+    <table class="table table-bordered table-dark">
+        <thead>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Photo</th>
+            <th></th>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < users.Length; i++) 
+            {
+                <tr>
+                    <td>@users[i].Name</td>
+                    <td>@users[i].Email</td>
+                    <td><img src="~/img/@users[i].PfpName" height="100px"/></td>
+                    <td><a class="btn btn-danger" asp-action="RemoveUser" asp-route-id="@users[i].Id">&#x2212;</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="section" id="memberships">
+    <h1 class="text-center">Users</h1>
+    <table class="table table-bordered table-dark">
+        <thead>
+            <th>Name</th>
+            <th>Payment</th>
+            <th>Logo</th>
+            <th></th>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < memberships.Length; i++)
+            {
+                <tr>
+                    <td>@memberships[i].Name</td>
+                    <td>@memberships[i].Monthly$</td>
+                    <td><img src="img/@memberships[i].LogoName" height="100px" /></td>
+                    <td><a class="btn btn-danger" asp-action="RemoveMembership" asp-route-id="@memberships[i].Id">&#x2212;</a></td>
+                </tr>
+            }
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><a class="btn btn-success" asp-action="CreateMembership">&#x2b;</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="section" id="skins">
+
+</div>
+
+<div class="section" id="games">
+
+</div>
